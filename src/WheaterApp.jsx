@@ -25,7 +25,7 @@ export const WheaterApp = () => {
       <div>
       <label>elige un pais</label><br />
       <select onChange={countryHandler}><br />
-        <option>Seleciona</option>
+        <option>Seleciona el pais</option>
        {countries.map(country => <option key={country.cca2} value={country.cca2}>{country.name.common}</option>)}
       </select>
       </div>
@@ -34,16 +34,16 @@ export const WheaterApp = () => {
             <div>
                <label>Elige una ciudad:</label><br />
                <select onChange={cityHandler}><br />
-                  <option value="">Selecciona</option>
+                  <option value="">Selecciona la ciudad</option>
                   {cities.map(city => <option key={city.id}>{city.name}</option>)}
                </select>
             </div>
       )}
       {weather && (
             <div>
-               <h2>Actual temperature: {weather.main.temp}º</h2>
-               <p>Min: {weather.main.temp_min.toFixed()}°</p>
-               <p>Max: {weather.main.temp_max.toFixed()}°</p>
+               <h2>Temperatura actual: {weather.main.temp}º</h2>
+               <p>Minimo: {weather.main.temp_min.toFixed()}°</p>
+               <p>Maximo: {weather.main.temp_max.toFixed()}°</p>
                <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt="weather icon" />
             </div>
       )}
