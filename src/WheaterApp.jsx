@@ -1,10 +1,55 @@
+import {useEffect, useState} from "react";
+import {getCountries} from "../src/service/countries";
+import { getCities } from "../src/service/cities";
+import { getCityWeather } from "../src/service/weather";
 
+export const WheaterApp = () => {
+  const [countries, setCountries] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [weather, setWeather] = useState(null);
 
-const WheaterApp = () => {
+  useEffect(() => {
+    (async () => {
+       setCountries(await getCountries());
+    })();
+ }, []);
+
+ const countryHandler = async e => {
+  e.currentTarget.value && setCities(await getCities(e.currentTarget.value));
+  setWeather(null);
+  }
+  const cityHandler = async e => e.currentTarget.value && setWeather(await getCityWeather(e.currentTarget.value));
   return (
-    <div>
+    <>
+      <div>
+      <label>elige un pais</label>
+      <select onChange={countryHandler}>
+        <option>Seleciona</option>
+       {countries.map(country => <option key={country.cca2} value={country.cca2}>{country.name.common}</option>)}
+      </select>
+      </div>
       
-    </div>
+      {cities.length > 0 && (
+            <div>
+               <label>Elige una ciudad:</label>
+               <select onChange={cityHandler}>
+                  <option value="">Selecciona</option>
+                  {cities.map(city => <option key={city.id}>{city.name}</option>)}
+               </select>
+            </div>
+      )}
+      {weather && (
+            <div>
+               <h2>Actual temperature: {weather.main.temp}º</h2>
+               <p>Min: {weather.main.temp_min.toFixed()}°</p>
+               <p>Max: {weather.main.temp_max.toFixed()}°</p>
+               <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt="weather icon" />
+            </div>
+      )}
+      
+    </>
+    
+
   )
 }
 
