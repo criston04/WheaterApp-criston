@@ -21,18 +21,19 @@ export const WheaterApp = () => {
   const cityHandler = async e => e.currentTarget.value && setWeather(await getCityWeather(e.currentTarget.value));
   return (
     <>
+      <h1>WEATHER APP</h1>
       <div>
-      <label>elige un pais</label>
-      <select onChange={countryHandler}>
+      <label>elige un pais</label><br />
+      <select onChange={countryHandler}><br />
         <option>Seleciona</option>
        {countries.map(country => <option key={country.cca2} value={country.cca2}>{country.name.common}</option>)}
       </select>
       </div>
-      
+
       {cities.length > 0 && (
             <div>
-               <label>Elige una ciudad:</label>
-               <select onChange={cityHandler}>
+               <label>Elige una ciudad:</label><br />
+               <select onChange={cityHandler}><br />
                   <option value="">Selecciona</option>
                   {cities.map(city => <option key={city.id}>{city.name}</option>)}
                </select>
