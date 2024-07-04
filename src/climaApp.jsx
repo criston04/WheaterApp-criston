@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import {getCountries} from "../src/service/countries";
-import { getCities } from "../src/service/cities";
-import { getCityWeather } from "../src/service/weather";
+import {getCountries} from "./service/countries";
+import { getCities } from "./service/cities";
+import { getCityWeather } from "./service/weather";
 
 export const WheaterApp = () => {
   const [countries, setCountries] = useState([]);
